@@ -34,13 +34,15 @@ jobs:
 
       - run: mkdir android-sdk-source && cd "$_"
 
-      - run: mkdir -p frameworks/base
+      - run: |
+          mkdir -p frameworks/base
+          mkdir -p development
 
       - name: Fetch sources from Google
         run: |
           git clone https://github.com/aosp-mirror/platform_frameworks_base.git --branch ${{ github.event.inputs.branch }} --depth 1 frameworks/base
           git clone https://android.googlesource.com/platform/libcore --branch ${{ github.event.inputs.branch }} --depth 1
-          git clone https://github.com/aosp-mirror/platform_development.git --branch ${{ github.event.inputs.branch }} --depth 1
+          git clone https://github.com/aosp-mirror/platform_development.git --branch ${{ github.event.inputs.branch }} --depth 1 development
           
       - name: Create a basic source.properties file
         run: echo -e "Pkg.UserSrc=false\nPkg.Revision=0\nAndroidVersion.ApiLevel=${{ github.event.inputs.apiLevel }}" > source.properties
@@ -56,5 +58,5 @@ jobs:
         with:
           tag_name: ${{ github.event.inputs.apiLevel }}_${{ github.event.inputs.branch }}
           name: Sources for Android ${{ github.event.inputs.apiLevel }}
-          files: sources-${{ github.event.inputs.apiLevel }}.zip
+          files: sources-*.zip
           fail_on_unmatched_files: true
