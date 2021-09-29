@@ -38,9 +38,9 @@ jobs:
 
       - name: Fetch sources from Google
         run: |
-          git clone https://android.googlesource.com/platform/frameworks/base --branch ${{ github.event.inputs.branch }} --depth 1 frameworks/base
+          git clone https://github.com/aosp-mirror/platform_frameworks_base.git --branch ${{ github.event.inputs.branch }} --depth 1 frameworks/base
           git clone https://android.googlesource.com/platform/libcore --branch ${{ github.event.inputs.branch }} --depth 1
-          git clone https://android.googlesource.com/platform/development --branch ${{ github.event.inputs.branch }} --depth 1
+          git clone https://github.com/aosp-mirror/platform_development.git --branch ${{ github.event.inputs.branch }} --depth 1
           
       - name: Create a basic source.properties file
         run: echo -e "Pkg.UserSrc=false\nPkg.Revision=0\nAndroidVersion.ApiLevel=${{ github.event.inputs.apiLevel }}" > source.properties
