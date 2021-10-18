@@ -1,7 +1,7 @@
 # Sources for Android SDK
 
-[![Latest API](https://img.shields.io/badge/API-30-blue)](https://developer.android.com/studio/releases/platforms)
-[![Download Package](https://img.shields.io/badge/Download-zip-red)](/../../releases/download/v30_20211014/sources-30.zip)
+[![Latest API](https://img.shields.io/badge/API-31-blue)](https://developer.android.com/studio/releases/platforms)
+[![Download Package](https://img.shields.io/badge/Download-zip-red)](/../../releases/download/v31_1634519641/sources-31.zip)
 ![Total number of downloads](https://img.shields.io/github/downloads/ni554n/sources-for-android-sdk/total?color=eeeeee&label=)
 
 The `Sources for Android SDK` package provides instant access to the documentation and source code of the `android.jar` classes in Android Studio.
@@ -14,7 +14,7 @@ You can enable Github [Release Watch](.images/watch-release.png) to get notified
 
 ## Usage
 
-1. Download and extract the `android-30` folder from the package
+1. Download and extract the `android-31` folder from the package
 2. Move the extracted folder into the [Android SDK Location's](.images/sdk-location.jpg) `/sources` directory.
 3. Restart Android Studio.
 
