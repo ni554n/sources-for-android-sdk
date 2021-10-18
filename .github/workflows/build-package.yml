@@ -1,0 +1,117 @@
+name: Build Android SDK Sources Package
+
+on:
+  # Allows this workflow to run manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "SDK Platform Source Branch Name"
+        required: true
+        default: "android-s-beta-5"
+      apiLevel:
+        description: "API Level"
+        required: true
+        default: "31"
+      versionName:
+        description: "Android Version Name"
+        required: false
+        default: "12"
+
+jobs:
+  build-sources-package:
+    # This script requires Python2. 18.04 is the last Ubuntu version to have that pre-installed.
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Create working directories
+        run: |
+          mkdir android-sdk-source && cd "$_"
+          mkdir -p frameworks/base
+          mkdir -p development
+
+      - name: Fetch the required sources
+        run: |
+          branchName=${{ github.event.inputs.branch }}
+
+          git clone https://github.com/aosp-mirror/platform_frameworks_base.git --branch $branchName --depth 1 frameworks/base
+          git clone https://android.googlesource.com/platform/libcore --branch $branchName --depth 1
+          git clone https://github.com/aosp-mirror/platform_development.git --branch $branchName --depth 1 development
+
+      - name: Create a basic source.properties file
+        run: echo -e "Pkg.UserSrc=false\nPkg.Revision=0\nAndroidVersion.ApiLevel=${{ github.event.inputs.apiLevel }}" > source.properties
+
+      - name: Modify the build script to use "android-${{ github.event.inputs.apiLevel }}" as the top-level directory
+        run: cat development/build/tools/mk_sources_zip.py | sed -e 's/TOP_FOLDER = .*/TOP_FOLDER = "android-${{ github.event.inputs.apiLevel }}"/' > mk_sources_zip.py
+
+      - name: Generate the ZIP package
+        run: python mk_sources_zip.py -z source.properties sources-${{ github.event.inputs.apiLevel }}.zip .
+
+      - name: Store current time and date
+        id: date
+        run: |
+          echo "::set-output name=today::$(date -u)"
+          echo "::set-output name=nowInEpochSeconds::$(date +%s)"
+
+      - name: Generate a tag name
+        id: tag
+        run: |
+          echo "::set-output name=name::v${{ github.event.inputs.apiLevel }}_${{ steps.date.outputs.nowInEpochSeconds }}"
+
+      - name: Delete stale releases
+        uses: dev-drprasad/delete-older-releases@v0.2.0
+        with:
+          keep_latest: 1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create a Github Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.tag.outputs.name }}
+          name: Sources for Android ${{ github.event.inputs.apiLevel }}
+          body: Built from the [${{ github.event.inputs.branch }}](https://github.com/aosp-mirror/platform_frameworks_base/tree/${{ github.event.inputs.branch }}) branch of the SDK source on ${{ steps.date.outputs.today }}.
+          files: sources-*.zip
+          fail_on_unmatched_files: true
+
+      - uses: actions/checkout@v2
+      - name: Update README.md
+        run: |
+          apiLevel=${{ github.event.inputs.apiLevel }}
+          tagName=${{ steps.tag.outputs.name }}
+          repo=${{ github.repository }}
+
+          # Updates line #3, #4, #5, #17 in the README.md file
+          sed -i \
+           -e "s|\(/API-\)[[:digit:]]*|\1$apiLevel|" \
+           -e "s|\(download/\)v[[:digit:]]*_.*.zip|\1$tagName/sources-$apiLevel.zip|" \
+           -e "s|\(downloads/\).*/.*/|\1$repo/|" \
+           -e "s|\(\`android-\)[[:digit:]]*|\1$apiLevel|" \
+           README.md
+
+          git config user.name ${{ github.repository_owner }}
+          git config user.email ${{ github.repository_owner }}@users.noreply.github.com
+          git add .
+          git commit -m "Release tag $tagName"
+          git push
+
+      - name: Update Repo Descriptions
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.PAT }}
+          script: |
+            const apiLevel = ${{ github.event.inputs.apiLevel }};
+
+            const versionName = `${{ github.event.inputs.versionName }}`;
+            const androidVersion = versionName ? `Android ${versionName}` : "Android";
+
+            github.rest.repos.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              description: `"Sources for Android ${apiLevel}" package built from a developing branch of ${androidVersion} SDK Platform source.`,
+            });
+
+            github.rest.repos.replaceAllTopics({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              names: ["android", "github-actions", "android-studio", "android-sdk", "android-sdk-sources", "sources-for-android", `api-${apiLevel}`]
+            });
