@@ -7,15 +7,15 @@ on:
       branch:
         description: "SDK Platform Source Branch Name"
         required: true
-        default: "android-s-beta-5"
+        default: "android-s-v2-preview-1"
       apiLevel:
         description: "API Level"
         required: true
-        default: "31"
+        default: "32"
       versionName:
         description: "Android Version Name"
         required: false
-        default: "12"
+        default: "12L"
 
 jobs:
   build-sources-package:
@@ -103,6 +103,7 @@ jobs:
 
             const versionName = `${{ github.event.inputs.versionName }}`;
             const androidVersion = versionName ? `Android ${versionName}` : "Android";
+            const androidVersionTag = versionName ? `android-${versionName.toLowerCase()}` : "";
 
             github.rest.repos.update({
               owner: context.repo.owner,
@@ -113,5 +114,14 @@ jobs:
             github.rest.repos.replaceAllTopics({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              names: ["android", "github-actions", "android-studio", "android-sdk", "android-sdk-sources", "sources-for-android", `android-${versionName}`, `api-${apiLevel}`]
+              names: [
+                "android",
+                "github-actions",
+                "android-studio",
+                "android-sdk",
+                "android-sdk-sources",
+                "sources-for-android",
+                androidVersionTag,
+                `api-${apiLevel}`,
+              ],
             });
