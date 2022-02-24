@@ -1,7 +1,7 @@
 # Sources for Android SDK
 
 [![Latest API](https://img.shields.io/badge/API-32-blue)](https://developer.android.com/studio/releases/platforms)
-[![Download Package](https://img.shields.io/badge/Download-zip-red)](/../../releases/download/v32_1639051090/sources-32.zip)
+[![Download Package](https://img.shields.io/badge/Download-zip-red)](/../../releases/download/v32_1645733566/sources-32.zip)
 ![Total number of downloads](https://img.shields.io/github/downloads/ni554n/sources-for-android-sdk/total?color=eeeeee&label=)
 
 The `Sources for Android SDK` package provides instant access to the documentation and source code of the `android.jar` classes in Android Studio.
