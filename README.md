@@ -4,11 +4,11 @@
 [![Download Package](https://img.shields.io/badge/Download-zip-red)](/../../releases/download/v33_1654803276/sources-33.zip)
 ![Total number of downloads](https://img.shields.io/github/downloads/ni554n/sources-for-android-sdk/total?color=eeeeee&label=)
 
-The `Sources for Android SDK` package provides instant access to the documentation and source code of the `android.jar` classes in Android Studio.
+The `Sources for Android SDK` package provides instant access to the documentation and source code of system framework in Android Studio. Without this package, documentations will be loaded from network, and system classes has to be decompiled when you `ctrl + click` on them to view the source.
 
-Unfortunately, this package does not become available during the Developer Preview, which slows down debugging and development while test-driving the upcoming `compileSdkVersion`.
+Unfortunately, this package does not become available during the Developer Preview, which slows down debugging and development while test-driving the upcoming `compileSdkVersion`. This Github Actions workflow can build that package from a developing branch of the [SDK platform source repo](https://android.googlesource.com/platform/frameworks/base).
 
-But in the meantime, this Github Actions workflow can build a package from a developing branch of the [SDK platform source repo](https://android.googlesource.com/platform/frameworks/base). This package can also be updated normally using the SDK updater when the official version becomes available.
+This package can also be updated normally using the SDK updater when the official version becomes available. But my recommendation is to uninstall this package from the SDK Manager first; otherwise it takes a long time to install the update due to the patching  mechanism of SDK update.
 
 You can enable Github [Release Watch](.images/watch-release.png) to get notified when a new build gets released on this repo.
 
@@ -24,7 +24,7 @@ You can enable Github [Release Watch](.images/watch-release.png) to get notified
 2. [Create a new token](https://github.com/settings/tokens/new?scopes=repo&description=Sources%20for%20Android%20SDK) with **_No expiration_**.
 3. Go to the [Repo Actions Secrets](/../../settings/secrets/actions/new) and add the generated token named as `PAT`.
 4. Now go to the [Actions Workflow](/../../actions/workflows/build-package.yml) and select `Run workflow` dropdown menu.
-5. Set a *Platform Source Branch Name* from the [Google Android Source Repo](https://android.googlesource.com/platform/frameworks/base), *API Level* and *Version Name* (optional).
+5. Set a _Platform Source Branch Name_ from the [Google Android Source Repo](https://android.googlesource.com/platform/frameworks/base), _API Level_ and _Version Name_ (optional).
 6. Run the workflow and wait for the package to appear on the [Releases](/../../releases).
 
 ## Acknowledgements
