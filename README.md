@@ -6,7 +6,7 @@
 
 The `Sources for Android SDK` package provides instant access to the documentation and source code of system framework in Android Studio. Without this package, documentations will be loaded from network, and system classes has to be decompiled when you `ctrl + click` on them to view the source.
 
-Unfortunately, this package does not become available during the Developer Preview, which slows down debugging and development while test-driving the upcoming `compileSdkVersion`. This Github Actions workflow can build that package from a developing branch of the [SDK platform source repo](https://android.googlesource.com/platform/frameworks/base).
+Unfortunately, this package does not become available during the Developer Preview, which slows down debugging and development while test-driving the upcoming `compileSdkVersion`. This GitHub Actions workflow can build that package from a developing branch of the [SDK platform source repo](https://android.googlesource.com/platform/frameworks/base).
 
 This package can also be updated normally using the SDK updater when the official version becomes available. But my recommendation is to uninstall this package from the SDK Manager first; otherwise it takes a long time to install the update due to the patching mechanism of SDK update.
 
@@ -23,7 +23,7 @@ You can enable GitHub [Release Watch](.images/watch-release.png) to get notified
 1. Fork this repo on GitHub.
 2. [Create a new token](https://github.com/settings/tokens/new?scopes=repo&description=Sources%20for%20Android%20SDK) with **_No expiration_**.
 3. Go to the [Repo Actions Secrets](/../../settings/secrets/actions/new) and add the generated token named as `PAT`.
-4. Now go to the [Build Android SDK Sources Package Workflow](/../../actions/workflows/build-package.yml) and select `Run workflow` dropdown menu.
+4. Now go to the [Build Android SDK Sources Package Workflow](/../../actions/workflows/build-package.yaml) and select `Run workflow` dropdown menu.
 5. Enter a _Platform Source Branch Name_ from the [Google Android Source Repo](https://android.googlesource.com/platform/frameworks/base), _API Level_ and _Version Name_ (optional).
 6. Run the workflow and wait for the package to appear on the [Releases](/../../releases).
 

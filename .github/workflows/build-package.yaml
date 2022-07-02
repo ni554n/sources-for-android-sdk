@@ -73,7 +73,7 @@ jobs:
           files: sources-*.zip
           fail_on_unmatched_files: true
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Update README.md
         run: |
           apiLevel=${{ github.event.inputs.apiLevel }}
@@ -95,7 +95,7 @@ jobs:
           git push
 
       - name: Update Repo Descriptions
-        uses: actions/github-script@v5
+        uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.PAT }}
           script: |
