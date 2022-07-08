@@ -108,7 +108,7 @@ jobs:
             github.rest.repos.update({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              description: `"Sources for Android ${apiLevel}" package built from a developing branch of ${androidVersion} SDK Platform source.`,
+              description: `A custom "Sources for Android ${apiLevel}" package built from the ${androidVersion} SDK Platform source code`,
             });
 
             github.rest.repos.replaceAllTopics({
