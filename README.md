@@ -20,7 +20,7 @@ You can enable GitHub [Release Watch](.images/watch-release.png) to get notified
 
 ## Build Yourself
 
-1. Fork this repo on GitHub.
+1. [Fork](https://github.com/ni554n/sources-for-android-sdk/fork) this repo on GitHub.
 2. [Create a new token](https://github.com/settings/tokens/new?scopes=repo&description=Sources%20for%20Android%20SDK) with **_No expiration_**.
 3. Go to the [Repo Actions Secrets](/../../settings/secrets/actions/new) and add the generated token named as `PAT`.
 4. Now go to the [Build Android SDK Sources Package Workflow](/../../actions/workflows/build-package.yaml) and select `Run workflow` dropdown menu.
