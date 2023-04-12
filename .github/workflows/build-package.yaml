@@ -7,15 +7,15 @@ on:
       branch:
         description: "SDK Platform Source Branch Name"
         required: true
-        default: "android-t-preview-1"
+        default: "master"
       apiLevel:
         description: "API Level"
         required: true
-        default: "33"
+        default: "34"
       versionName:
         description: "Android Version Name"
         required: false
-        default: "13"
+        default: "14"
 
 jobs:
   build-sources-package:
