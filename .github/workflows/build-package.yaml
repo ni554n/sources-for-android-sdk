@@ -19,8 +19,7 @@ on:
 
 jobs:
   build-sources-package:
-    # This script requires Python2. 18.04 is the last Ubuntu version to have that pre-installed.
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Create working directories
@@ -42,6 +41,9 @@ jobs:
 
       - name: Modify the build script to use "android-${{ github.event.inputs.apiLevel }}" as the top-level directory
         run: cat development/build/tools/mk_sources_zip.py | sed -e 's/TOP_FOLDER = .*/TOP_FOLDER = "android-${{ github.event.inputs.apiLevel }}"/' > mk_sources_zip.py
+
+      - name: Install Python2
+        run: sudo apt install -y python2
 
       - name: Generate the ZIP package
         run: python mk_sources_zip.py -z source.properties sources-${{ github.event.inputs.apiLevel }}.zip .
