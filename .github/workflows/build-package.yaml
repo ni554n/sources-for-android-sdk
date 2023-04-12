@@ -124,6 +124,6 @@ jobs:
                 "android-sdk-sources",
                 "sources-for-android",
                 androidVersionTag,
-                `api-${apiLevel}`,
+                `api-${apiLevel.toLowerCase()}`,
               ],
             });
