@@ -46,7 +46,7 @@ jobs:
         run: sudo apt install -y python2
 
       - name: Generate the ZIP package
-        run: python mk_sources_zip.py -z source.properties sources-${{ github.event.inputs.apiLevel }}.zip .
+        run: python2 mk_sources_zip.py -z source.properties sources-${{ github.event.inputs.apiLevel }}.zip .
 
       - name: Store current time and date
         id: date
