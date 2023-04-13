@@ -9,7 +9,7 @@ on:
         required: true
         default: "master"
       apiLevel:
-        description: "API Level"
+        description: "API Level (Integer only)"
         required: true
         default: "34"
       versionName:
