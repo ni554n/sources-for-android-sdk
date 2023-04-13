@@ -37,7 +37,7 @@ jobs:
           git clone https://github.com/aosp-mirror/platform_development.git --branch $branchName --depth 1 development
 
       - name: Create a basic source.properties file
-        run: echo -e "Pkg.UserSrc=false\nPkg.Revision=0\nAndroidVersion.ApiLevel=${{ github.event.inputs.apiLevel }}" > source.properties
+        run: echo -e "Pkg.UserSrc=false\nPkg.Revision=0\nAndroidVersion.ApiLevel=${{ github.event.inputs.apiLevel }}\nAndroidVersion.IsBaseSdk=true" > source.properties
 
       - name: Modify the build script to use "android-${{ github.event.inputs.apiLevel }}" as the top-level directory
         run: cat development/build/tools/mk_sources_zip.py | sed -e 's/TOP_FOLDER = .*/TOP_FOLDER = "android-${{ github.event.inputs.apiLevel }}"/' > mk_sources_zip.py

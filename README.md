@@ -18,13 +18,13 @@ You can enable GitHub [Release Watch](.images/watch-release.png) to get notified
 2. Move the extracted folder into the [Android SDK Location's](.images/sdk-location.jpg) `/sources` directory.
 3. Restart Android Studio.
 
-## Build Yourself
+## Build it Yourself
 
 1. [Fork](https://github.com/ni554n/sources-for-android-sdk/fork) this repo on GitHub.
 2. [Create a new token](https://github.com/settings/tokens/new?scopes=repo&description=Sources%20for%20Android%20SDK) with **_No expiration_**.
 3. Go to the [Repo Actions Secrets](/../../settings/secrets/actions/new) and add the generated token named as `PAT`.
 4. Now go to the [Build Android SDK Sources Package Workflow](/../../actions/workflows/build-package.yaml) and select `Run workflow` dropdown menu.
-5. Pick and enter a <u>Platform Source Branch Name</u> from the [Google Android Source Repo](https://android.googlesource.com/platform/frameworks/base), <u>API Level</u> and <u>Version Name</u> (optional).
+5. Pick and enter a **Platform Source Branch Name** from the [Google Android Source Repo](https://android.googlesource.com/platform/frameworks/base), **API Level** and **Version Name** (optional).
     > _API Level_ should be Integer only. Builds with String levels like _UpsideDownCake_ don't get recognized in Android Studio.
 6. Run the workflow and wait for the package to appear on the [Releases](/../../releases).
 
