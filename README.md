@@ -37,3 +37,4 @@ Based on the build instructions from [this gist](https://gist.github.com/cketti/
 **Author:** [Nissan Ahmed](https://ni554n.github.io) ([@ni554n](https://twitter.com/ni554n))
 
 **Donate:** [PayPal](https://paypal.me/ni554n)
+<img src="https://ping.anissan.com/?repo=sources-for-android-sdk" width="0" height="0" align="right">
