@@ -1,7 +1,7 @@
 # Sources for Android SDK
 
-[![Latest API](https://img.shields.io/badge/API-33-blue)](https://developer.android.com/studio/releases/platforms)
-[![Download Package](https://img.shields.io/badge/Download-zip-red)](/../../releases/download/v33_1654803276/sources-33.zip)
+[![Latest API](https://img.shields.io/badge/API-34-blue)](https://developer.android.com/studio/releases/platforms)
+[![Download Package](https://img.shields.io/badge/Download-zip-red)](/../../releases/download/v34_1686173402/sources-34.zip)
 ![Total number of downloads](https://img.shields.io/github/downloads/ni554n/sources-for-android-sdk/total?color=eeeeee&label=)
 
 The `Sources for Android SDK` package provides instant access to the documentation and source code of system framework in Android Studio. Without this package, documentations will be loaded from network, and system classes has to be decompiled when you `ctrl + click` on them to view the source.
@@ -14,7 +14,7 @@ You can enable GitHub [Release Watch](.images/watch-release.png) to get notified
 
 ## Usage
 
-1. Download the package from [Releases](/../../releases) and extract the `android-33` folder from the package
+1. Download the package from [Releases](/../../releases) and extract the `android-34` folder from the package
 2. Move the extracted folder into the [Android SDK Location's](.images/sdk-location.jpg) `/sources` directory.
 3. Restart Android Studio.
 
